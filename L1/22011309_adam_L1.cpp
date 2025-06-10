@@ -1,3 +1,10 @@
+/*
+id: 22011309
+name: Adam Haris
+group: G1
+lab: L1
+*/
+
 #include <iostream>
 #include <string>
 using namespace std;
