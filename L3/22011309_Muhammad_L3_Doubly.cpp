@@ -35,79 +35,63 @@ public:
     
     void add_element(string name) {
         Node* newNode = new Node(name);
-        
+
         if (head == nullptr) {
             head = newNode;
             tail = newNode;
+            
+            head->next = head;
+            head->prev = head;
         } else {
             tail->next = newNode;
             newNode->prev = tail;
+            newNode->next = head;
+            head->prev = newNode;
             tail = newNode;
         }
     }
     
     void display_list() {
-        Node* temp = head;
-        while (temp != nullptr) {
-            cout << temp->name << " <-> ";
-            temp = temp->next;
+        if (head == nullptr) {
+            cout << "NULL" << endl;
+            return;
         }
-        cout << "NULL" << endl;
+
+        Node* temp = head;
+        do {
+            cout << temp->name << " -> ";
+            temp = temp->next;
+        } while (temp != head);
+        cout << head->name << endl; // To show circular connection
     }
     
     void display_reverse() {
+        if (tail == nullptr) {
+            cout << "NULL" << endl;
+            return;
+        }
+
         cout << "Reverse order: ";
         Node* temp = tail;
-        while (temp != nullptr) {
-            cout << temp->name << " <-> ";
+        do {
+            cout << temp->name << " -> ";
             temp = temp->prev;
-        }
-        cout << "NULL" << endl;
+        } while (temp != tail);
+        cout << tail->name << endl; // To show circular connection
     }
-    
-    void delete_by_value(string val) {
-        if (head == nullptr) return;
-        
-        Node* current = head;
-        
-        // Find the node to delete
-        while (current != nullptr && current->name != val) {
-            current = current->next;
-        }
-        
-        // If node not found
-        if (current == nullptr) return;
-        
-        // If only one node in the list
-        if (head == tail) {
-            head = nullptr;
-            tail = nullptr;
-        }
-        // If deleting the head
-        else if (current == head) {
-            head = head->next;
-            head->prev = nullptr;
-        }
-        // If deleting the tail
-        else if (current == tail) {
-            tail = tail->prev;
-            tail->next = nullptr;
-        }
-        // If deleting a middle node
-        else {
-            current->prev->next = current->next;
-            current->next->prev = current->prev;
-        }
-        
-        delete current;
-    }
+
     
     ~DoublyLinkedList() {
-        while (head != nullptr) {
-            Node* temp = head;
-            head = head->next;
+        if (head == nullptr) return;
+        Node* temp = head;
+        do {
+
+            Node* next = temp->next;
             delete temp;
-        }
+            temp = next;
+        } while (temp != head);
+        head = nullptr;
+        tail = nullptr;
     }
 };
 
@@ -125,13 +109,6 @@ int main() {
     linkedlist.display_list();
     
     linkedlist.display_reverse();
-    
-    cout << "Enter a name to delete: ";
-    cin >> name;
-    linkedlist.delete_by_value(name);
-    
-    cout << "After deletion: ";
-    linkedlist.display_list();
     
     return 0;
 }
