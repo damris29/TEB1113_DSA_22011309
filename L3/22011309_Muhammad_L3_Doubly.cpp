@@ -80,19 +80,6 @@ public:
         cout << tail->name << endl; // To show circular connection
     }
 
-    
-    ~DoublyLinkedList() {
-        if (head == nullptr) return;
-        Node* temp = head;
-        do {
-
-            Node* next = temp->next;
-            delete temp;
-            temp = next;
-        } while (temp != head);
-        head = nullptr;
-        tail = nullptr;
-    }
 };
 
 int main() {
@@ -107,7 +94,6 @@ int main() {
     
     cout << "Initial list: ";
     linkedlist.display_list();
-    
     linkedlist.display_reverse();
     
     return 0;
