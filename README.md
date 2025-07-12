@@ -9,4 +9,4 @@ This repository contains all lab activities for Algorithm and Data Structure.
 | 11/6/2025 <br> 18/6/2025 | Lab 3 <br> Lab 4     | Linked list <br> [Singly](L3_L4/22011309_Muhammad_L3.cpp) <br> [Doubly](L3_L4/22011309_Muhammad_L4_Doubly.cpp)|
 | 25/6/2025 | Lab 5 | Stack - [Push & Pop](L5/22011309_Muhammad_L5_Stack.cpp) |
 | 2/7/2025 | Lab 6 | Queue |
-| 9/7/2025 | Lab 7 | Binary Tree - |
+| 9/7/2025 | Lab 7 | [Binary Tree](L7/22011309_Muhammad_L7.cpp) |
