@@ -1,75 +1,85 @@
 #include <iostream>
 using namespace std;
 
-// Node definition
 class Node {
 public:
     string name;
     Node* left;
     Node* right;
 
-    Node(string val) {
-        name = val;
+    Node(string n) {
+        name = n;
         left = nullptr;
         right = nullptr;
     }
 };
 
-// Binary Tree definition
 class Tree {
-private:
+public:
     Node* root;
 
-    // Helper function to insert recursively
-    Node* add_element(Node* node, string name) {
-        if (node == nullptr) {
-            return new Node(name);
-        }
-
-        if (name < node->name) {
-            node->left = add_element(node->left, name);
-        } else {
-            node->right = add_element(node->right, name);
-        }
-
-        return node;
-    }
-
-    // Helper function for in-order traversal
-    void in_order(Node* node) {
-        if (node != nullptr) {
-            in_order(node->left);
-            cout << node->name << " ";
-            in_order(node->right);
-        }
-    }
-
-public:
     Tree() {
         root = nullptr;
     }
 
-    void add_element(string name) {
-        root = add_element(root, name);
+    void add_root(string name) {
+        root = new Node(name);
     }
 
-    void print_in_order() {
-        cout << "In-order Traversal: ";
-        in_order(root);
-        cout << endl;
+    // Recursively search for a node by name
+    Node* find_node(Node* current, const string& name) {
+        if (!current) return nullptr;
+        if (current->name == name) return current;
+
+        Node* found = find_node(current->left, name);
+        if (found) return found;
+
+        return find_node(current->right, name);
+    }
+
+    // Add left child to parent by name
+    void add_left(string parent_name, string child_name) {
+        Node* parent = find_node(root, parent_name);
+        if (parent) {
+            if (!parent->left)
+                parent->left = new Node(child_name);
+            else
+                cout << "Left child already exists for " << parent_name << endl;
+        } else {
+            cout << "Parent not found: " << parent_name << endl;
+        }
+    }
+
+    // Add right child to parent by name
+    void add_right(string parent_name, string child_name) {
+        Node* parent = find_node(root, parent_name);
+        if (parent) {
+            if (!parent->right)
+                parent->right = new Node(child_name);
+            else
+                cout << "Right child already exists for " << parent_name << endl;
+        } else {
+            cout << "Parent not found: " << parent_name << endl;
+        }
     }
 };
 
-// Main function
+
 int main() {
     Tree tree;
-    tree.add_element("Charlie");
-    tree.add_element("Alice");
-    tree.add_element("Eve");
-    tree.add_element("Bob");
-    tree.add_element("David");
 
-    tree.print_in_order();  // Expected order: Alice Bob Charlie David Eve
-    
-    return 0;
+    tree.add_root("A");
+    tree.add_left("A", "B");
+    tree.add_right("A", "C");
+    tree.add_left("B", "D");
+    tree.add_right("B", "E");
+    tree.add_left("C", "F");
+    tree.add_right("C", "G");
+
+    // Manual check
+    cout << "Root: " << tree.root->name << endl;
+    cout << "Left of A: " << tree.root->left->name << endl;
+    cout << "Right of A: " << tree.root->right->name << endl;
+
+    return 0;
 }
