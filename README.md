@@ -10,3 +10,5 @@ This repository contains all lab activities for Algorithm and Data Structure.
 | 25/6/2025 | Lab 5 | Stack - [Push & Pop](L5/22011309_Muhammad_L5_Stack.cpp) |
 | 2/7/2025 | Lab 6 | Queue <br> [Array](L6/Muhammad_22011309_L6_Queue_Array.cpp) <br> [LinkedList](L6/Muhammad_22011309_L6_Queue_LinkedList.cpp) |
 | 9/7/2025 | Lab 7 | [Binary Tree](L7/22011309_Muhammad_L7.cpp) |
+| 16/7/2025 | Lab 8 | [Binary Search Tree](L8/BinaryTree.cpp)  |
+| 23/7/2025  | Lab 9 | |
